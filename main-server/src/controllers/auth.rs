@@ -298,7 +298,7 @@ async fn create_account<'c>(
         "INSERT INTO accounts(username, avatar, referrer) VALUES ($1, $2, $3) RETURNING id",
         username,
         avatar,
-        referrer.map(|i| &i[..128])
+        referrer.map(|i| if i.len() > 128 { &i[..128] } else { i })
     )
     .fetch_one(pool)
     .await
