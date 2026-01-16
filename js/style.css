@@ -214,6 +214,10 @@ html {
     color: var(--color-foreground);
   }
 
+  code {
+    white-space: pre;
+  }
+
   & p {
     margin-left: 0.5rem;
   }
