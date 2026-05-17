@@ -104,7 +104,7 @@ impl AchievementType {
             AchievementType::JavaScript1000Point => "Node Nerd",
             AchievementType::JavaScript3500Point => "Node Narcissist",
             AchievementType::Rust1000Point => "Crab Rave",
-            AchievementType::Vyxal1000Point => "[Insert Joke Here]",
+            AchievementType::Vyxal1000Point => "Absolute Gamer",
             AchievementType::C1000Point => "Deep Blue Sea",
             AchievementType::Apl1000Point => "Original Sin",
             AchievementType::StarTheRepo => "Starstruck",
