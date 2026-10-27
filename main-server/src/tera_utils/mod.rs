@@ -7,7 +7,7 @@ use macros::HtmlRenderer;
 use reqwest::StatusCode;
 use serde::Serialize;
 use std::error::Error;
-use tera::{Context, escape_html};
+use tera::Context;
 
 pub mod auto_input;
 mod get_tera;
@@ -16,18 +16,24 @@ mod markdown;
 mod syntax_highlighting;
 mod vite;
 
+pub(crate) fn escape_html_str(input: &str) -> String {
+    let mut buf = Vec::with_capacity(input.len());
+    tera::escape_html(input, &mut buf).expect("writing to a Vec cannot fail");
+    String::from_utf8(buf).expect("escape_html produces valid UTF-8")
+}
+
 fn render_html_error(title: &str, error: &tera::Error) -> Response {
-    let message = match &error.kind {
+    let message = match error.kind() {
         tera::ErrorKind::Msg(e) => format!("{e}\n{:?}", error.source()),
-        _ => format!("{:#?}", error.kind),
+        _ => format!("{:#?}", error.kind()),
     };
     Response::builder()
         .status(StatusCode::INTERNAL_SERVER_ERROR)
         .header("Content-Type", "text/html")
         .body(Body::from(format!(
             "<h2>{}</h2>\n<pre>{:#}</pre>",
-            escape_html(title),
-            escape_html(&message)
+            escape_html_str(title),
+            escape_html_str(&message)
         )))
         .unwrap()
 }

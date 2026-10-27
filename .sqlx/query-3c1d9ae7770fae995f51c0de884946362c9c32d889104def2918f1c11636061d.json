@@ -6,42 +6,90 @@
       {
         "ordinal": 0,
         "name": "author_id!",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "user_scoring_info",
+            "name": "author"
+          }
+        }
       },
       {
         "ordinal": 1,
         "name": "author_name",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "username"
+          }
+        }
       },
       {
         "ordinal": 2,
         "name": "author_avatar",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "avatar"
+          }
+        }
       },
       {
         "ordinal": 3,
         "name": "author_join_date",
-        "type_info": "Timestamptz"
+        "type_info": "Timestamptz",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "created_at"
+          }
+        }
       },
       {
         "ordinal": 4,
         "name": "first_places!",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": {
+          "Table": {
+            "table": "user_scoring_info",
+            "name": "first_places"
+          }
+        }
       },
       {
         "ordinal": 5,
         "name": "solutions!:i64",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": {
+          "Table": {
+            "table": "user_scoring_info",
+            "name": "sols"
+          }
+        }
       },
       {
         "ordinal": 6,
         "name": "total_score!:i64",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": {
+          "Table": {
+            "table": "user_scoring_info",
+            "name": "total_score"
+          }
+        }
       },
       {
         "ordinal": 7,
         "name": "rank!:i64",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": {
+          "Table": {
+            "table": "user_scoring_info",
+            "name": "rank"
+          }
+        }
       }
     ],
     "parameters": {

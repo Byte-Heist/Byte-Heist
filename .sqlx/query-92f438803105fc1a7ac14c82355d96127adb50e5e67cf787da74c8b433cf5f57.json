@@ -1,0 +1,76 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n                SELECT\n                    points,\n                    is_post_mortem,\n                    language,\n                    author,\n                    accounts.username as \"author_name!\"\n                FROM solutions\n                LEFT JOIN accounts on solutions.author = accounts.id\n                WHERE solutions.id=$1\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "points",
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "solutions",
+            "name": "points"
+          }
+        }
+      },
+      {
+        "ordinal": 1,
+        "name": "is_post_mortem",
+        "type_info": "Bool",
+        "origin": {
+          "Table": {
+            "table": "solutions",
+            "name": "is_post_mortem"
+          }
+        }
+      },
+      {
+        "ordinal": 2,
+        "name": "language",
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "solutions",
+            "name": "language"
+          }
+        }
+      },
+      {
+        "ordinal": 3,
+        "name": "author",
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "solutions",
+            "name": "author"
+          }
+        }
+      },
+      {
+        "ordinal": 4,
+        "name": "author_name!",
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "username"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  "hash": "92f438803105fc1a7ac14c82355d96127adb50e5e67cf787da74c8b433cf5f57"
+}

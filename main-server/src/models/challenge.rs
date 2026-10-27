@@ -260,11 +260,10 @@ impl GetById for ChallengeWithAuthorInfo {
             accounts.avatar as author_avatar
             FROM challenges LEFT JOIN accounts ON challenges.author = accounts.id
             WHERE challenges.id=$1
-            "
-        .to_string();
+            ";
 
         let challenge: Option<ChallengeWithAuthorInfo> =
-            sqlx::query_as(&sql).bind(id).fetch_optional(pool).await?;
+            sqlx::query_as(sql).bind(id).fetch_optional(pool).await?;
 
         Ok(challenge)
     }

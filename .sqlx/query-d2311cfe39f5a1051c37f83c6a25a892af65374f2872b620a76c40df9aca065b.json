@@ -6,42 +6,85 @@
       {
         "ordinal": 0,
         "name": "id",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "solutions",
+            "name": "id"
+          }
+        }
       },
       {
         "ordinal": 1,
         "name": "author_id",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "solutions",
+            "name": "author"
+          }
+        }
       },
       {
         "ordinal": 2,
         "name": "author_name",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "username"
+          }
+        }
       },
       {
         "ordinal": 3,
         "name": "author_avatar",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "avatar"
+          }
+        }
       },
       {
         "ordinal": 4,
         "name": "points",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "solutions",
+            "name": "points"
+          }
+        }
       },
       {
         "ordinal": 5,
         "name": "rank!",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": "Expression"
       },
       {
         "ordinal": 6,
         "name": "is_post_mortem",
-        "type_info": "Bool"
+        "type_info": "Bool",
+        "origin": {
+          "Table": {
+            "table": "solutions",
+            "name": "is_post_mortem"
+          }
+        }
       },
       {
         "ordinal": 7,
         "name": "score:i32",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "scores",
+            "name": "score"
+          }
+        }
       }
     ],
     "parameters": {

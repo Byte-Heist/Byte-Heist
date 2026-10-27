@@ -60,8 +60,8 @@ impl RawComment {
                     parent,
                     message,
                     author as author_id,
-                    accounts.username as author_username,
-                    accounts.avatar as author_avatar,
+                    accounts.username as "author_username!",
+                    accounts.avatar as "author_avatar!",
                     challenge_change_suggestions.old_value as "old_value?",
                     challenge_change_suggestions.new_value as "new_value?",
                     challenge_change_suggestions.status as "status?: DiffStatus"

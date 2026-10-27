@@ -4,9 +4,9 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-sqlx = { version = "0.8.2", features = ["postgres", "runtime-tokio", "time"] }
-tokio = { version = "1.40.0", features = ["rt-multi-thread", "signal"] }
-serenity = "0.12"
+sqlx = { version = "0.9.0", features = ["postgres", "runtime-tokio", "time"] }
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "signal"] }
+serenity = "0.12.5"
 slug = "0.1.6"
 common = { path = "../common", features = ["sqlx", "diff"] }
 reqwest = { version = "0.12", features = [
@@ -14,7 +14,7 @@ reqwest = { version = "0.12", features = [
     "rustls-tls",
     "http2",
 ], default-features = false }
-serde = { version = "1.0.210", features = ["derive"] }
+serde = { version = "1.0.229", features = ["derive"] }
 
 [lints.clippy]
 print_stdout = "deny"

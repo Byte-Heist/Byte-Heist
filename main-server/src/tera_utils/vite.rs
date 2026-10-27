@@ -1,7 +1,9 @@
 use std::{collections::HashMap, sync::OnceLock};
 
 use serde::Deserialize;
-use tera::{escape_html, Value};
+use tera::{Kwargs, State, TeraResult, Value};
+
+use super::escape_html_str;
 
 #[derive(Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -62,18 +64,21 @@ impl ManifestEntry {
 
 static VITE_MANIFEST: OnceLock<HashMap<String, ManifestEntry>> = OnceLock::new();
 
-pub fn load_assets(values: &HashMap<String, Value>) -> Result<Value, tera::Error> {
-    let scripts = values
-        .get("modules")
-        .ok_or_else(|| tera::Error::msg("Expected argument \"modules\'"))?;
-    let modules = match scripts {
-        Value::Array(arr) => arr
-            .iter()
+pub fn load_assets(kwargs: Kwargs, _: &State) -> TeraResult<Value> {
+    let scripts = kwargs
+        .get::<&Value>("modules")?
+        .ok_or_else(|| tera::Error::message("Expected argument \"modules\'"))?;
+    let modules = if let Some(arr) = scripts.as_array() {
+        arr.iter()
             .map(|k| k.as_str())
             .collect::<Option<Vec<&str>>>()
-            .ok_or_else(|| tera::Error::msg("Expected modules to be an array of strings"))?,
-        Value::String(k) => vec![k.as_str()],
-        _ => return Err(tera::Error::msg("Expected scripts to be a string or array")),
+            .ok_or_else(|| tera::Error::message("Expected modules to be an array of strings"))?
+    } else if let Some(k) = scripts.as_str() {
+        vec![k]
+    } else {
+        return Err(tera::Error::message(
+            "Expected scripts to be a string or array",
+        ));
     };
 
     if cfg!(debug_assertions) {
@@ -83,35 +88,37 @@ pub fn load_assets(values: &HashMap<String, Value>) -> Result<Value, tera::Error
         for module in modules {
             out.push_str(&format!(
                 r#"<script type="module" src="http://localhost:5173/static/target/{}"></script>"#,
-                escape_html(module)
+                escape_html_str(module)
             ));
         }
 
-        Ok(Value::String(out))
+        Ok(Value::from(out))
     } else {
         let imports = match ManifestEntry::find_all_imports(modules) {
             Ok(e) => e,
             Err(ModuleNotFound(name)) => {
-                return Err(tera::Error::from(format!("Cannot find module \"{name}\"")))
+                return Err(tera::Error::message(format!(
+                    "Cannot find module \"{name}\""
+                )));
             }
         };
-        Ok(Value::String(
+        Ok(Value::from(
             imports
                 .scripts
                 .into_iter()
                 .map(|script| {
                     format!(
                         r#"<script type="module" src="/static/target/{}"></script>"#,
-                        escape_html(script)
+                        escape_html_str(script)
                     )
                 })
                 .chain(imports.styles.into_iter().map(|style| {
                     format!(
                         r#"<link rel="stylesheet" href="/static/target/{}">"#,
-                        escape_html(style)
+                        escape_html_str(style)
                     )
                 }))
-                .collect(),
+                .collect::<String>(),
         ))
     }
 }

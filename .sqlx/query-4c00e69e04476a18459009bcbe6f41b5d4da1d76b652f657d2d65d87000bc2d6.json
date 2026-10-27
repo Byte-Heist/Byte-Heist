@@ -6,12 +6,24 @@
       {
         "ordinal": 0,
         "name": "id",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "challenges",
+            "name": "id"
+          }
+        }
       },
       {
         "ordinal": 1,
         "name": "name",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "challenges",
+            "name": "name"
+          }
+        }
       },
       {
         "ordinal": 2,
@@ -28,12 +40,24 @@
               ]
             }
           }
+        },
+        "origin": {
+          "Table": {
+            "table": "challenges",
+            "name": "category"
+          }
         }
       },
       {
         "ordinal": 3,
         "name": "score",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "scores",
+            "name": "score"
+          }
+        }
       },
       {
         "ordinal": 4,
@@ -49,42 +73,60 @@
               ]
             }
           }
+        },
+        "origin": {
+          "Table": {
+            "table": "challenges",
+            "name": "difficulty"
+          }
         }
       },
       {
         "ordinal": 5,
         "name": "description!",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": "Expression"
       },
       {
         "ordinal": 6,
         "name": "post_mortem_date",
-        "type_info": "Timestamptz"
+        "type_info": "Timestamptz",
+        "origin": {
+          "Table": {
+            "table": "challenges",
+            "name": "post_mortem_date"
+          }
+        }
       },
       {
         "ordinal": 7,
         "name": "is_post_mortem!",
-        "type_info": "Bool"
+        "type_info": "Bool",
+        "origin": "Expression"
       },
       {
         "ordinal": 8,
         "name": "submission_count!",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": "Expression"
       },
       {
         "ordinal": 9,
         "name": "user_has_submitted!",
-        "type_info": "Bool"
+        "type_info": "Bool",
+        "origin": "Expression"
       },
       {
         "ordinal": 10,
         "name": "up_votes",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": "Expression"
       },
       {
         "ordinal": 11,
         "name": "down_votes",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": "Expression"
       }
     ],
     "parameters": {

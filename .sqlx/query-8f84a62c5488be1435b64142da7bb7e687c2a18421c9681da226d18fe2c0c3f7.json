@@ -6,17 +6,35 @@
       {
         "ordinal": 0,
         "name": "author_id",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "challenge_votes",
+            "name": "author"
+          }
+        }
       },
       {
         "ordinal": 1,
         "name": "is_upvote",
-        "type_info": "Bool"
+        "type_info": "Bool",
+        "origin": {
+          "Table": {
+            "table": "challenge_votes",
+            "name": "is_upvote"
+          }
+        }
       },
       {
         "ordinal": 2,
         "name": "author_username",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "username"
+          }
+        }
       }
     ],
     "parameters": {

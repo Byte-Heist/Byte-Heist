@@ -4,42 +4,42 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-anyhow = "1.0.89"
+anyhow = "1.0.104"
 
 macros = { path = "../macros" }
-async-process = "2.3.0"
-axum = { version = "0.8.3", features = ["macros"] }
-futures-util = "0.3.30"
-serde = { version = "1.0.210", features = ["derive"] }
-serde_bytes = "0.11.15"
-sqlx = { version = "0.8.2", features = [
+async-process = "2.5.0"
+axum = { version = "0.8.9", features = ["macros"] }
+futures-util = "0.3.34"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_bytes = "0.11.19"
+sqlx = { version = "0.9.0", features = [
     "bigdecimal",
     "postgres",
     "runtime-tokio",
     "time",
 ] }
-tokio = { version = "1.40.0", features = ["rt-multi-thread", "signal"] }
-tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "signal"] }
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
 reqwest = { version = "0.12", features = [
     "json",
     "rustls-tls",
     "http2",
 ], default-features = false }
 common = { path = "../common" }
-tera = "1.20.0"
+tera = { version = "2.4.0", features = ["glob_fs"] }
 dotenvy = "0.15.7"
-oauth2 = "5.0.0-rc.1"
-tower-sessions = "0.14.0"
-tower-http = { version = "0.6.1", features = ["catch-panic", "fs"] }
-serde_json = "1.0.128"
+oauth2 = "5.0.0"
+tower-sessions = "0.15.0"
+tower-http = { version = "0.7.1", features = ["catch-panic", "fs"] }
+serde_json = "1.0.154"
 markdown-it = "0.6.1"
-tower-sessions-file-store = "0.2.0"
+tower-sessions-file-store = "0.3.0"
 discord-bot = { path = "../discord-bot" }
 num-format = "0.4.4"
-time = { version = "0.3.41", features = ["macros"] }
+time = { version = "0.3.55", features = ["macros"] }
 syntect = "5.3.0"
-itertools = "0.14.0"
-strum = { version = "0.27" }
+itertools = "0.15.0"
+strum = { version = "0.28" }
 
 
 [lints.clippy]

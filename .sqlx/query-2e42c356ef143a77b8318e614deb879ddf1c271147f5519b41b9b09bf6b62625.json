@@ -6,27 +6,47 @@
       {
         "ordinal": 0,
         "name": "achievement!",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": "Expression"
       },
       {
         "ordinal": 1,
         "name": "progress",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": {
+          "Table": {
+            "table": "achievements",
+            "name": "progress"
+          }
+        }
       },
       {
         "ordinal": 2,
         "name": "total",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": {
+          "Table": {
+            "table": "achievements",
+            "name": "total"
+          }
+        }
       },
       {
         "ordinal": 3,
         "name": "awarded_at",
-        "type_info": "Timestamptz"
+        "type_info": "Timestamptz",
+        "origin": {
+          "Table": {
+            "table": "achievements",
+            "name": "awarded_at"
+          }
+        }
       },
       {
         "ordinal": 4,
         "name": "total_awarded!",
-        "type_info": "Int8"
+        "type_info": "Int8",
+        "origin": "Expression"
       }
     ],
     "parameters": {

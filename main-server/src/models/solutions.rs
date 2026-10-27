@@ -48,7 +48,7 @@ impl GetById for SolutionWithLanguage {
                     is_post_mortem,
                     language,
                     author,
-                    accounts.username as author_name
+                    accounts.username as "author_name!"
                 FROM solutions
                 LEFT JOIN accounts on solutions.author = accounts.id
                 WHERE solutions.id=$1
@@ -316,7 +316,7 @@ impl InvalidatedSolution {
     ) -> Result<Vec<InvalidatedSolution>, sqlx::Error> {
         let result = query_as!(
             InvalidatedSolution,
-            "SELECT solutions.language, challenges.id as challenge_id, challenges.name as challenge_name
+            "SELECT solutions.language, challenges.id as \"challenge_id!\", challenges.name as \"challenge_name!\"
             FROM solutions LEFT JOIN challenges ON solutions.challenge = challenges.id
             WHERE solutions.valid = false AND solutions.author = $1",
             user

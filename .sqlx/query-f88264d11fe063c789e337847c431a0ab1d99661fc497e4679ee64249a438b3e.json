@@ -1,0 +1,52 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT solutions.language, challenges.id as \"challenge_id!\", challenges.name as \"challenge_name!\"\n            FROM solutions LEFT JOIN challenges ON solutions.challenge = challenges.id\n            WHERE solutions.valid = false AND solutions.author = $1",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "language",
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "solutions",
+            "name": "language"
+          }
+        }
+      },
+      {
+        "ordinal": 1,
+        "name": "challenge_id!",
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "challenges",
+            "name": "id"
+          }
+        }
+      },
+      {
+        "ordinal": 2,
+        "name": "challenge_name!",
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "challenges",
+            "name": "name"
+          }
+        }
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int4"
+      ]
+    },
+    "nullable": [
+      false,
+      true,
+      true
+    ]
+  },
+  "hash": "f88264d11fe063c789e337847c431a0ab1d99661fc497e4679ee64249a438b3e"
+}

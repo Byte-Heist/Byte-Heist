@@ -17,12 +17,24 @@
               ]
             }
           }
+        },
+        "origin": {
+          "Table": {
+            "table": "challenge_change_suggestions",
+            "name": "field"
+          }
         }
       },
       {
         "ordinal": 1,
         "name": "replacement_value",
-        "type_info": "Text"
+        "type_info": "Text",
+        "origin": {
+          "Table": {
+            "table": "challenge_change_suggestions",
+            "name": "new_value"
+          }
+        }
       }
     ],
     "parameters": {

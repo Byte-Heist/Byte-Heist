@@ -6,37 +6,79 @@
       {
         "ordinal": 0,
         "name": "user_id?",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "achievements",
+            "name": "user_id"
+          }
+        }
       },
       {
         "ordinal": 1,
         "name": "related_challenge_id",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "achievements",
+            "name": "related_challenge"
+          }
+        }
       },
       {
         "ordinal": 2,
         "name": "related_language?",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "achievements",
+            "name": "related_language"
+          }
+        }
       },
       {
         "ordinal": 3,
         "name": "user_username",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "username"
+          }
+        }
       },
       {
         "ordinal": 4,
         "name": "user_avatar",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "avatar"
+          }
+        }
       },
       {
         "ordinal": 5,
         "name": "related_challenge_name?",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "challenges",
+            "name": "name"
+          }
+        }
       },
       {
         "ordinal": 6,
         "name": "awarded_at!",
-        "type_info": "Timestamptz"
+        "type_info": "Timestamptz",
+        "origin": {
+          "Table": {
+            "table": "achievements",
+            "name": "awarded_at"
+          }
+        }
       }
     ],
     "parameters": {

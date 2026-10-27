@@ -6,37 +6,74 @@
       {
         "ordinal": 0,
         "name": "id",
-        "type_info": "Int4"
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "id"
+          }
+        }
       },
       {
         "ordinal": 1,
         "name": "username",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "username"
+          }
+        }
       },
       {
         "ordinal": 2,
         "name": "avatar",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "avatar"
+          }
+        }
       },
       {
         "ordinal": 3,
         "name": "preferred_language",
-        "type_info": "Varchar"
+        "type_info": "Varchar",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "preferred_language"
+          }
+        }
       },
       {
         "ordinal": 4,
         "name": "admin",
-        "type_info": "Bool"
+        "type_info": "Bool",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "admin"
+          }
+        }
       },
       {
         "ordinal": 5,
         "name": "last_creation_action",
-        "type_info": "Timestamptz"
+        "type_info": "Timestamptz",
+        "origin": {
+          "Table": {
+            "table": "accounts",
+            "name": "last_creation_action"
+          }
+        }
       },
       {
         "ordinal": 6,
         "name": "has_solved_a_challenge!",
-        "type_info": "Bool"
+        "type_info": "Bool",
+        "origin": "Expression"
       }
     ],
     "parameters": {

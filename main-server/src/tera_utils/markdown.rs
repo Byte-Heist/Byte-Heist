@@ -8,7 +8,7 @@ use markdown_it::{
         extra::syntect::set_theme,
     },
 };
-use tera::{Filter, Map, Number};
+use tera::{Kwargs, Map, State, TeraResult, Value};
 
 use super::syntax_highlighting::SYNTECT_THEME;
 
@@ -54,72 +54,55 @@ where
     })
 }
 
-pub struct MarkdownFilter;
-
-impl Filter for MarkdownFilter {
-    fn is_safe(&self) -> bool {
-        true
+pub fn markdown_filter(value: &Value, kwargs: Kwargs, _: &State) -> TeraResult<Value> {
+    if kwargs.iter().next().is_some() {
+        return Err(tera::Error::message(
+            "The markdown function takes no arguments",
+        ));
     }
-
-    fn filter(
-        &self,
-        value: &tera::Value,
-        args: &std::collections::HashMap<String, tera::Value>,
-    ) -> tera::Result<tera::Value> {
-        if !args.is_empty() {
-            return Err(tera::Error::msg("The markdown function takes no arguments"));
-        }
-        let text = value
-            .as_str()
-            .ok_or_else(|| tera::Error::msg("Expected type to be a string"))?;
-        Ok(tera::Value::String(render_markdown(text, |_, _| ())))
-    }
+    let text = value
+        .as_str()
+        .ok_or_else(|| tera::Error::message("Expected type to be a string"))?;
+    Ok(Value::safe_string(&render_markdown(text, |_, _| ())))
 }
 
-pub struct MarkdownFilterWithTableOfContents;
-
-impl Filter for MarkdownFilterWithTableOfContents {
-    fn filter(
-        &self,
-        value: &tera::Value,
-        args: &std::collections::HashMap<String, tera::Value>,
-    ) -> tera::Result<tera::Value> {
-        if !args.is_empty() {
-            return Err(tera::Error::msg("The markdown function takes no arguments"));
-        }
-        let text = value
-            .as_str()
-            .ok_or_else(|| tera::Error::msg("Expected type to be a string"))?;
-
-        let mut headings = vec![];
-
-        let content = render_markdown(text, |node, _index| {
-            if let Some(e) = node.cast::<ATXHeading>() {
-                headings.push((e.level, node.collect_text()))
-            }
-        });
-
-        let mut map = Map::new();
-        map.insert("content".to_string(), tera::Value::String(content));
-        map.insert(
-            "headings".to_string(),
-            tera::Value::Array(
-                headings
-                    .into_iter()
-                    .map(|i| {
-                        let mut map = Map::new();
-                        map.insert("text".to_owned(), tera::Value::String(i.1));
-                        map.insert(
-                            "level".to_owned(),
-                            tera::Value::Number(
-                                Number::from_i128(i.0 as i128).expect("Surely a u8 fits in a i128"),
-                            ),
-                        );
-                        tera::Value::Object(map)
-                    })
-                    .collect(),
-            ),
-        );
-        Ok(tera::Value::Object(map))
+pub fn markdown_with_table_of_contents(
+    value: &Value,
+    kwargs: Kwargs,
+    _: &State,
+) -> TeraResult<Value> {
+    if kwargs.iter().next().is_some() {
+        return Err(tera::Error::message(
+            "The markdown function takes no arguments",
+        ));
     }
+    let text = value
+        .as_str()
+        .ok_or_else(|| tera::Error::message("Expected type to be a string"))?;
+
+    let mut headings = vec![];
+
+    let content = render_markdown(text, |node, _index| {
+        if let Some(e) = node.cast::<ATXHeading>() {
+            headings.push((e.level, node.collect_text()))
+        }
+    });
+
+    let mut map = Map::new();
+    map.insert("content".into(), Value::safe_string(&content));
+    map.insert(
+        "headings".into(),
+        Value::from(
+            headings
+                .into_iter()
+                .map(|i| {
+                    let mut map = Map::new();
+                    map.insert("text".into(), Value::from(i.1));
+                    map.insert("level".into(), Value::from(i.0));
+                    Value::from(map)
+                })
+                .collect::<Vec<_>>(),
+        ),
+    );
+    Ok(Value::from(map))
 }
