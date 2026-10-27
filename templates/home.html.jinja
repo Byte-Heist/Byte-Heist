@@ -1,5 +1,4 @@
 {% extends "base/base.html.jinja" %}
-{% import "base/challenge_card.html.jinja" as challenge_card %}
 {% block full_content %}
     {% if object.invalid_solutions_exist %}
         <div class="warning">
@@ -63,12 +62,11 @@
                     {% for challenge in object.public_challenges %}
                         {% if loop.index <= 8 %}
                             {% if loop.index <=4 %}
-                                {{ challenge_card::challenge_box(challenge=challenge) 
-                                }}
+                                {{<challenge_box challenge={challenge} />}}
                             {% elif loop.index <=6 %}
-                                <div class="hidden sm:block">{{ challenge_card::challenge_box(challenge=challenge) }}</div>
+                                <div class="hidden sm:block">{{<challenge_box challenge={challenge} />}}</div>
                             {% else %}
-                                <div class="hidden md:block">{{ challenge_card::challenge_box(challenge=challenge) }}</div>
+                                <div class="hidden md:block">{{<challenge_box challenge={challenge} />}}</div>
                             {% endif %}
                         {% endif %}
                     {% endfor %}

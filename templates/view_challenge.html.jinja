@@ -1,13 +1,11 @@
 {% extends "base/base.html.jinja" %}
-{% import "base/challenge_tabs.html.jinja" as challenge_tabs %}
-{% import "base/test_cases.html.jinja" as test_cases %}
 {% block title %}
   <title>{{ object.name }} - Byte Heist</title>
 {% endblock title %}
 {% block description %}
   <meta name="description" value="{{ object.description }}" />
 {% endblock description %}
-{% macro vote_button(is_upvote, reactions) %}
+{% component vote_button(is_upvote, reactions, @account) %}
   <button type="submit"
           name="is_upvote"
           value="{{ is_upvote }}"
@@ -27,8 +25,8 @@
       👎
     {% endif %}
   </button>
-{% endmacro %}
-{% macro comment(com) %}
+{% endcomponent vote_button %}
+{% component comment(com, @object, @account) %}
   <div class="comment" id="comment-{{ com.id }}">
     <div class="comment-author">
       <a href="/user/{{ com.author_id }}">
@@ -41,8 +39,8 @@
             method="post"
             action="/challenge/{{ object.id }}/{{ object.name | slugify }}/view/vote">
         <input type="hidden" name="comment_id" value="{{ com.id }}">
-        {{ self::vote_button(is_upvote=true, reactions=com.up_reactions) }}
-        {{ self::vote_button(is_upvote=false, reactions=com.down_reactions) }}
+        {{<vote_button is_upvote={true} reactions={com.up_reactions} />}}
+        {{<vote_button is_upvote={false} reactions={com.down_reactions} />}}
       </form>
       {%- if com.diff -%}<i class="text-xs">This suggestion will automatically be accepted if it gets enough 👍</i>
     {% endif %}
@@ -62,10 +60,10 @@
     {{- com.message | markdown -}}
   </div>
   {%- if com.diff -%}
-    <div style="grid-column: span 3;">{{ test_cases::test_case_content(columns=com.diff.columns) }}</div>
+    <div style="grid-column: span 3;">{{<test_case_content columns={com.diff.columns} />}}</div>
   {%- endif -%}
   <div class="comment-children">
-    {% for child in com.children %}{{ self::comment(com=child) }}{% endfor %}
+    {% for child in com.children %}{{<comment com={child} />}}{% endfor %}
   </div>
   {% if account and account.has_solved_a_challenge %}
     <form class="comment-reply"
@@ -77,17 +75,17 @@
     </form>
   {% endif %}
 </div>
-{% endmacro %}
+{% endcomponent comment %}
 {% block content %}
   {% if object.id %}
-    {{ challenge_tabs::challenge_tabs(active="view", id=object.id, name=object.name, author=object.author) }}
+    {{<challenge_tabs active="view" id={object.id} name={object.name} author={object.author} />}}
   {% endif %}
   <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl text-white">{{ object.name }}</h1>
   <form class="challenge-reactions"
         method="post"
         action="/challenge/{{ object.id }}/{{ object.name | slugify }}/view/vote">
-    {{ self::vote_button(is_upvote=true, reactions=object.up_reactions) }}
-    {{ self::vote_button(is_upvote=false, reactions=object.down_reactions) }}
+    {{<vote_button is_upvote={true} reactions={object.up_reactions} />}}
+    {{<vote_button is_upvote={false} reactions={object.down_reactions} />}}
   </form>
   <h2 class="text-2xl font-bold tracking-tighter sm:text-3xl text-white">Description</h2>
   <div id="description-container">{{ object.description | markdown }}</div>
@@ -123,7 +121,7 @@
     </div>
   {% endif %}
   <h2 class="text-2xl font-bold tracking-tighter sm:text-3xl text-white">Comments</h2>
-  {% for comment in object.comments %}{{ self::comment(com=comment) }}{% endfor %}
+  {% for comment in object.comments %}{{<comment com={comment} />}}{% endfor %}
   {% if account and account.has_solved_a_challenge %}
     <form class="comment-reply"
           method="post"

@@ -1,4 +1,4 @@
-{% macro challenge_box(challenge, beta=false) %}
+{% component challenge_box(challenge, beta=false, @account) %}
     <a href="/challenge/ {{- challenge.id -}} / {{- challenge.name | slugify -}} / {%- if beta -%} view {%- else -%} solve {%- endif -%}" data-challenge-card data-challenge-id="{{ challenge.id }}" data-challenge-category="{{ challenge.category }}" {% if beta %}data-challenge-beta{% endif %} {% if challenge.points %}data-challenge-points="{{ challenge.points }}"{% endif %} class="
        h-full
        transition-all
@@ -100,4 +100,4 @@
             </div>
         </div>
     </a>
-{% endmacro %}
+{% endcomponent challenge_box %}

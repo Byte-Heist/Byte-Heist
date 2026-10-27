@@ -1,15 +1,11 @@
 {% extends "base/base.html.jinja" %}
-{% import "base/challenge_tabs.html.jinja" as challenge_tabs %}
-{% import "base/test_cases.html.jinja" as test_cases %}
-{% import "base/radio.html.jinja" as radio %}
-{% import "base/validation.html.jinja" as validation %}
 {% block scripts %}
   {{ super() }}
   {{ modules(modules="js/create-challenge-page.ts") | safe }}
 {% endblock scripts %}
 {% block content %}
   {% if object.id %}
-    {{ challenge_tabs::challenge_tabs(active="edit", id=object.id, name=object.name, author=object.author) }}
+    {{<challenge_tabs active="edit" id={object.id} name={object.name} author={object.author} />}}
   {% endif %}
   <div class="flex flex-col gap-6">
     <form method="post" id="submit-challenge-form">
@@ -62,9 +58,9 @@
       {% include "submit_challenge/submit_button.html.jinja" %}
       <div id="test-case-container">
         {% if object.tests %}
-          {{ test_cases::test_cases(cases=object.tests) }}
+          {{<test_cases cases={object.tests} />}}
         {% else %}
-          {{ test_cases::test_cases(cases=False) }}
+          {{<test_cases cases={False} />}}
         {% endif %}
       </div>
     </form>

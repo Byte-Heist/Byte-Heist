@@ -1,8 +1,8 @@
-{% macro radio(name, value, label, selected) %}
+{% component radio(name, value, label, selected) %}
     <input type="radio"
            id="{{ name }}-{{ value }}"
            name="{{ name }}"
            value="{{ value }}"
            {% if value==selected %}checked{% endif %}>
     <label for="{{ name }}-{{ value }}" class="label">{{ label }}</label>
-{% endmacro radio %}
+{% endcomponent radio %}

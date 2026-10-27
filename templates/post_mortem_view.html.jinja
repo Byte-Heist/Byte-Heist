@@ -1,7 +1,4 @@
 {% extends "base/base.html.jinja" %}
-{% import "base/challenge_tabs.html.jinja" as challenge_tabs %}
-{% import "base/test_cases.html.jinja" as test_cases %}
-{% import "base/language_selector.html.jinja" as language_selector %}
 {% block title %}
   <title>{{ object.name }} - Byte Heist</title>
 {% endblock title %}
@@ -10,11 +7,11 @@
 {% endblock description %}
 {% block content %}
   {% if object.id %}
-    {{ challenge_tabs::challenge_tabs(active="post-mortem", id=object.id, name=object.name, author=object.author) }}
+    {{<challenge_tabs active="post-mortem" id={object.id} name={object.name} author={object.author} />}}
   {% endif %}
   <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl text-white">{{ object.name }}</h1>
   {% set challenge_name = object.name | slugify %}
-  {{ language_selector::language_selector(href=("/challenge/"~object.id ~ "/" ~ challenge_name ~ "/solutions/") , selected=object.language) }}
+  {{<language_selector href={"/challenge/"~object.id ~ "/" ~ challenge_name ~ "/solutions/"} selected={object.language} />}}
   {% for solution in object.solutions %}
     <div class="post-mortem-solution
                 {% if solution.is_post_mortem %}post-mortem{% endif %}">

@@ -8,5 +8,5 @@
               {% if object.is_post_mortem %}
                   disabled
               {% endif %}>{{- object.judge -}}</textarea>
-    {{ validation::validation(name="judge") }}
+    {{<validation name="judge" />}}
 </div>

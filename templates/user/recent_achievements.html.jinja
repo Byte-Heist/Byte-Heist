@@ -7,7 +7,7 @@
         </h3>
         <div>
             {% for achievement in object.recent_achievements %}
-                {{ achievement_widget::achievement_widget(achievement=achievement) }}
+                {{<achievement_widget achievement={achievement} />}}
             {% else %}
                 No achievements earned yet
             {% endfor %}

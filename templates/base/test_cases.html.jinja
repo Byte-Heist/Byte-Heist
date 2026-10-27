@@ -1,4 +1,4 @@
-{% macro test_cases(cases) %}
+{% component test_cases(cases) %}
   {# Note:
   This macro is also invoked with an empty "cases" object when creating the "initial framework"
   that the JS will use to fill in the test cases after a re-submit.
@@ -48,14 +48,14 @@
               </h2>
               <div class="test-case-status">{{ test.status }}</div>
             </div>
-            <div class="test-case-content">{{ self::test_case_content(columns=test.columns) }}</div>
+            <div class="test-case-content">{{<test_case_content columns={test.columns} />}}</div>
           </div>
         {% endfor %}
       {% endif %}
     </div>
   </div>
-{% endmacro test_cases %}
-{% macro test_case_content(columns) %}
+{% endcomponent test_cases %}
+{% component test_case_content(columns) %}
   <div class="test-case-column-headings test-case-{{ columns.column_titles | length }}-columns">
     {% for heading in columns.column_titles %}<div>{{ heading }}</div>{% endfor %}
   </div>
@@ -66,4 +66,4 @@
                    grid-column: {{ field.column + 1 }} / span {{ field.span }}">{{- field.content -}}</span>
     {% endfor %}
   </div>
-{% endmacro diff_column %}
+{% endcomponent test_case_content %}

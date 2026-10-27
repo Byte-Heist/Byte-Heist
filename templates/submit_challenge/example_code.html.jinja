@@ -9,5 +9,5 @@
               {% if object.is_post_mortem %}
                   disabled
               {% endif %}>{{- object.example_code -}}</textarea>
-    {{ validation::validation(name="example-code") }}
+    {{<validation name="example-code" />}}
 </div>

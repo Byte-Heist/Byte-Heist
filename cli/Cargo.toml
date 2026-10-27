@@ -6,4 +6,4 @@ edition = "2024"
 [dependencies]
 
 common = { path = "../common" }
-strum = { version = "0.27" }
+strum = { version = "0.28" }

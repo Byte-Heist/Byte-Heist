@@ -1,4 +1,4 @@
-{% macro language_selector(href, selected) %}
+{% component language_selector(href, selected) %}
     <div class="w-full tabs language-selector">
         <nav class="w-full" role="tablist" aria-orientation="horizontal">
             {% for lang, lang_data in languages() %}
@@ -12,4 +12,4 @@
             {% endfor %}
         </nav>
     </div>
-{% endmacro %}
+{% endcomponent language_selector %}

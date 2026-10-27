@@ -1,4 +1,3 @@
-{% import "base/test_cases.html.jinja" as test_cases %}
 {% extends "base/base.html.jinja" %}
 {% block content %}
     <h1 class="text-3xl font-bold">Pending Unread Change Suggestions</h1>
@@ -14,7 +13,7 @@
             <blockquote class="p-2 border-l-4 border-l-solid border-l-grey">
                 {{ change_suggestion.message }}
             </blockquote>
-            <div style="grid-column: span 3;">{{ test_cases::test_case_content(columns=change_suggestion.diff) }}</div>
+            <div style="grid-column: span 3;">{{<test_case_content columns={change_suggestion.diff} />}}</div>
             <a class="btn btn-primary"
                href="/challenge/{{ change_suggestion.challenge_id }}/{{ change_suggestion.challenge_name | slugify }}/view#comment-{{ change_suggestion.id }}">
                 View In Context

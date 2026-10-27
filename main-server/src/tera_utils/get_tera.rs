@@ -32,8 +32,6 @@ impl IntoResponse for GetTerraError {
 pub fn get_tera() -> Result<&'static Tera, GetTerraError> {
     let value = TERA.get_or_init(|| {
         let mut tera = Tera::new();
-        tera.load_from_glob("templates/**/*")?;
-        tera.autoescape_on(vec![".html.jinja", ".xml.jinja", ".html", ".xml"]);
         tera.register_function("languages", get_langs);
         tera.register_function("modules", load_assets);
         tera.register_filter("markdown", markdown_filter);
@@ -54,6 +52,8 @@ pub fn get_tera() -> Result<&'static Tera, GetTerraError> {
         tera.register_filter("un_camelcase", un_camelcase);
         tera.register_filter("language_display_name", get_lang_name);
         tera.register_filter("language_syntax", get_lang_syntax);
+        tera.load_from_glob("templates/**/*")?;
+        tera.autoescape_on(vec![".html.jinja", ".xml.jinja", ".html", ".xml"]);
         Ok(tera)
     });
 

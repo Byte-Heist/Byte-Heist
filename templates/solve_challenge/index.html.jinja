@@ -1,6 +1,3 @@
-{% import "base/test_cases.html.jinja" as test_cases %}
-{% import "base/challenge_tabs.html.jinja" as challenge_tabs %}
-{% import "base/language_selector.html.jinja" as language_selector %}
 {% extends "base/base.html.jinja" %}
 {% block head %}
   {{ super() }}
@@ -18,7 +15,7 @@
   {{ modules(modules="js/solve-page.ts") | safe }}
 {% endblock scripts %}
 {% block content %}
-  {{ challenge_tabs::challenge_tabs(active="solve", id=object.challenge.id, name=object.challenge.name, author=object.challenge.author) }}
+  {{<challenge_tabs active="solve" id={object.challenge.id} name={object.challenge.name} author={object.challenge.author} />}}
   <div class="flex flex-col gap-6">
     <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl text-white">{{ object.challenge.name }}</h1>
     <p>
@@ -39,7 +36,7 @@
       {% include "solve_challenge/leaderboard.html.jinja" %}
     </div>
     {% set challenge_name = object.challenge.name | slugify %}
-    {{ language_selector::language_selector(href=("/challenge/"~object.challenge.id ~ "/" ~ challenge_name ~ "/solve/") , selected=object.language) }}
+    {{<language_selector href={"/challenge/"~object.challenge.id ~ "/" ~ challenge_name ~ "/solve/"} selected={object.language} />}}
     <form method="post" class="challenge-submission-form">
       {% if object.previous_solution_invalid %}
         <div class="warning">
@@ -71,6 +68,6 @@
       <button type="submit" class="btn btn-primary">Submit!</button>
       <div class="error hidden solution-submit-error"></div>
     </form>
-    {{ test_cases::test_cases(cases=object.tests) }}
+    {{<test_cases cases={object.tests} />}}
   </div>
 {% endblock content %}

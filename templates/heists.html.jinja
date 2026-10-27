@@ -1,5 +1,4 @@
 {% extends "base/base.html.jinja" %}
-{% import "base/challenge_card.html.jinja" as challenge_card %}
 {% block content %}
     <div class="flex flex-col gap-4 mt-10">
         <div class="flex justify-between items-center">
@@ -69,11 +68,11 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
                  data-challenges-grid>
                 {% if object.public_challenges %}
-                    {% for challenge in object.public_challenges %}{{ challenge_card::challenge_box(challenge=challenge) }}{% endfor %}
+                    {% for challenge in object.public_challenges %}{{<challenge_box challenge={challenge} />}}{% endfor %}
                 {% endif %}
                 {% if object.beta_challenges %}
                     {% for challenge in object.beta_challenges %}
-                        {{ challenge_card::challenge_box(challenge=challenge, beta=true) }}
+                        {{<challenge_box challenge={challenge} beta={true} />}}
                     {% endfor %}
                 {% endif %}
                 {% if not object.public_challenges and not object.beta_challenges %}

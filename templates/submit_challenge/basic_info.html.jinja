@@ -6,7 +6,7 @@
          name="name"
          value="{{ object.name }}"
          {% if object.is_post_mortem %}disabled{% endif %} />
-  {{ validation::validation(name="name") }}
+  {{<validation name="name" />}}
 </div>
 <div class="grid gap-3">
   <label for="challenge-description">Description:</label>
@@ -16,15 +16,15 @@
             {% if object.is_post_mortem %}
               disabled
             {% endif %}>{{- object.description -}}</textarea>
-  {{ validation::validation(name="description") }}
+  {{<validation name="description" />}}
 </div>
 <div class="grid gap-3">
   <label for="challenge-unit">Unit:</label>
   <input id="challenge-unit" value="{{- object.unit -}}" name="unit">
 </div>
 <div>
-  {{ validation::validation(name="category") }}
-  {{ radio::radio(name="category", value="code-golf", selected=object.category, label="Code Golf") }}
+  {{<validation name="category" />}}
+  {{<radio name="category" value="code-golf" selected={object.category} label="Code Golf" />}}
   <p>Code golf challenges should:</p>
   <ol>
     <li>Not access the source code in any way</li>
@@ -34,13 +34,13 @@
       Combine multiple test cases in a single run whenever possible. Best practice is to shuffle test cases and divide them into 1-3 runs.
     </li>
   </ol>
-  {{ radio::radio(name="category", value="restricted-source", selected=object.category, label="Restricted Source") }}
+  {{<radio name="category" value="restricted-source" selected={object.category} label="Restricted Source" />}}
   <p>Restricted challenges should:</p>
   <ol>
     <li>Have a legitimate, non-cheating example code entered</li>
     <li>Present the test cases in the standard format</li>
   </ol>
-  {{ radio::radio(name="category", value="code-challenge", selected=object.category, label="Code Challenge") }}
+  {{<radio name="category" value="code-challenge" selected={object.category} label="Code Challenge" />}}
   <p>Restricted challenges should:</p>
   <ol>
     <li>Use a custom scoring function</li>
@@ -49,7 +49,7 @@
       Ideally distance from the highest score to the lowest would be at most about 100 points for the leaderboard ranking to work the best
     </li>
   </ol>
-  {{ radio::radio(name="category", value="private", selected=object.category, label="Private") }}
+  {{<radio name="category" value="private" selected={object.category} label="Private" />}}
   <p>
     Private challenges have no rules. You can share them in the Discord, but they won't be shown on the home page. Use this for puzzles and other non-challenges where you don't want to share example code.
   </p>

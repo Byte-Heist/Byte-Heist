@@ -1,4 +1,4 @@
-{% macro validation(name) %}
+{% component validation(name, @object) %}
     {% if object.validation and object.validation[name] %}
         <div class="validation-error"
              data-field-name="{{ name }}"
@@ -8,4 +8,4 @@
              data-field-name="{{ name }}"
              id="validation-error-{{ name|slugify }}"></div>
     {% endif %}
-{% endmacro %}
+{% endcomponent validation %}

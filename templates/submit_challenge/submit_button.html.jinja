@@ -1,4 +1,4 @@
-{{ validation::validation(name="status") }}
+{{<validation name="status" />}}
 {% if account %}
     {% if account.admin or object.status != "public" %}
         <button name="status"
